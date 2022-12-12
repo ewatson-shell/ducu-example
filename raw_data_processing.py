@@ -18,8 +18,8 @@ for file in csv_files:
 
 print(csv_list)
 
-feature_columns = ['BSFC', 'Power kW','Fuel Flow kg/hr FLOWFUEL', 'OBD Long Term Fuel Trim Shift  % OBD_LTFT', 'Engine Torque NM TORQUE_1' ]
-
+#feature_columns = ['BSFC', 'Power kW','Fuel Flow kg/hr FLOWFUEL', 'OBD Long Term Fuel Trim Shift  % OBD_LTFT', 'Engine Torque NM TORQUE_1' ]
+feature_columns = ['Injector Pulse width mS OBD_INJ']
 df_cols = ['Fuel', 'Run', 'Fuel_Block', 'Block', 'Response', 'SOT', 'EOT', 'change', 'pert_change']
 
 raw_data_processed_df = pd.DataFrame(columns = df_cols)
@@ -43,6 +43,8 @@ for df in csv_list:
     block = filter_df['Block'].values[2]
     fuel_block = filter_df['Fuel_Block'].values[2]
     fuel = filter_df['Fuel'].values[2]
+    filename = filter_df['Filename'].values[2]
+    df = pd.DataFrame(columns=df_cols)
     for col in feature_columns:
         y=filter_df[col].values.astype(float)
         x=filter_df['seconds'].astype(float).loc[int(3600):int(21600)].values
@@ -70,10 +72,17 @@ for df in csv_list:
     
         row = {'Fuel':fuel, 'Run':run, 'Fuel_Block':fuel_block, 'Block':block, 'Response':col, 'SOT':SOT, 'EOT':EOT, 'change':delta, 'pert_change':pct_delta}
         raw_data_processed_df.append(row, ignore_index=True)
+        df.append(row, ignore_index=True)
         print(raw_data_processed_df.head(20))
 
-        with open(r"C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Dirty_Up_Clean_Up\\DUCU-example\\ducu-example\\full_data\\raw_data_processed.csv", 'a+') as f:
+       # with open(r"C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Dirty_Up_Clean_Up\\DUCU-example\\ducu-example\\full_data\\raw_data_processed.csv", 'a+') as f:
+       #     dict_writer_object = DictWriter(f, fieldnames = df_cols)
+       #     dict_writer_object.writerow(row)
+       #     f.close()
+
+        with open(rf"C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Dirty_Up_Clean_Up\\DUCU-example\\ducu-example\\full_data\\injector_pulse_width.csv", 'a+') as f:
             dict_writer_object = DictWriter(f, fieldnames = df_cols)
             dict_writer_object.writerow(row)
             f.close()
         
+
