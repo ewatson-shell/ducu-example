@@ -26,6 +26,11 @@ csv_fp_listdir = os.listdir(csv_fp)
 csv_orig = []
  # csv_orig is a list of dataframes//csvs from the list of files from csv_dir which is in a folder called CSV manipulated.
  # QUESTION: currently unsure what exactly csv_manipulated involves.
+ # ANSWER: csv_manipulated is just the read in datafiles it seems. 
+    # Still the three index rows
+    # everything else the same.
+ # have a feeling csv_manipulated may be ... just the read in files only their sheets potentially? 
+ # pretty un processed but still need to check and confirm this.
 for filename in csv_files:
     df = pd.read_csv(f"{csv_dir}{filename}", index_col=0)
     csv_orig.append(df)
@@ -60,6 +65,8 @@ for i in csv:
 full_df = pd.concat([csv[0],csv[1],csv[2],csv[3],csv[4],csv[5],csv[6],csv[7],csv[8],csv[9],csv[10]], ignore_index = True)
 
 # HERE WE ARE REMOVING THE RELATIVE TRUES (DOES THIS WORK MAYBE CHECK?)
+# QUESTION: If this is the point where the trues are removed then do need to make a note of number of datarows lost.
+
 for col in df.columns: 
     df = df[df[col] !='True']
     df = df[df[col] !='TRUE']
@@ -75,41 +82,29 @@ full_df.to_csv(f"{full_data_dir}full_data_2.csv")
 
 
 ## adding the kpa conversion column
+# here it reads in the full_data csv and not the full_data2 version? why is that?  
+# # additionally it doesn't actually even read either csv because it has commented out csv and doesn't read it in.
 #df = pd.read_csv(f"{full_data_dir}full_data.csv", index_col=False)
 df = full_df
-df['KPA_Constant'] = 6.89476
-
-
-
-
-
-# check in kpa or convert
-#-----------------------------
-# check data dict on what these are 
+df['KPA_Constant'] = 6.89476 
+# QUESTION: 15:31 - 13/12/2022
+# QUESTION: what comes before csv_manipulated? in this question I mean which script comes before? 
 #---------------------------
 # inlet airpressure -> P_INAIR (kPa)
 # coolant pressure -> P_COOLOU(PSI) (   CONVERT    )
 # exhaust backpressure -> P_EXHABS(kPa)
 # fuel rail pressure -> P_FUELS(PSI) (   CONVERT    )
-
-# haven't done this yet 
-# changing object types to float where possible 
-print(df.dtypes)
-
-print("==============================")
-print(df.dtypes)
-print("===========================")
 df['Coolant Pressure Outlet PSI P_COOLOU'] = df['Coolant Pressure Outlet PSI P_COOLOU'].astype(float)
 
-for i in df.columns:
+for column in df.columns:
     try:
-        df[i] = df[df[i] != 'True']
-        df[i] = df[df[i] != 'TRUE']
-        df[i] = df[i].astype(float)
+        df[column] = df[df[column] != 'True']
+        df[column] = df[df[column] != 'TRUE']
+        df[column] = df[column].astype(float)
     except:
-        print(f"{i} cannot be changed")
-    q = df[i].dtype
-    print(f"{i}, {q})")
+        print(f"{column} cannot be changed") # does this happen? # TODO: ACTION: change the q's and i's here.
+    col_dtype = df[column].dtype
+    print(f"{column}, {col_dtype})")
 
 print("df['Coolant Pressure Outlet PSI P_COOLOU']", df['Coolant Pressure Outlet PSI P_COOLOU'].dtype)
 print("df['KPA_Constant']", df['KPA_Constant'].dtype)
@@ -117,7 +112,7 @@ print("-------------------------------------------------------------------------
 
 print(df['Engine speed RPM SPEED'].unique())
 
-
+# UP TO HERE
 # updated from psi to kpa
 df['Coolant Pressure Outlet kPA P_COOLOU'] = df['Coolant Pressure Outlet PSI P_COOLOU']*df['KPA_Constant']
 df['Supply Fuel pressure kpa P_FUELS'] = df['Supply Fuel pressure  PSI P_FUELS']*df["KPA_Constant"]
@@ -125,9 +120,6 @@ df['Supply Fuel pressure kpa P_FUELS'] = df['Supply Fuel pressure  PSI P_FUELS']
 print("uniques:")
 print(df['Supply Fuel pressure kpa P_FUELS'].unique())
 
-
-# TODO ANCORA
-# CREATE POWER COLUMN
 try:
     df['Power kW'] = df['OBD Engine Speed RPM OBD_RPM']*60*2*np.pi*df['Engine Torque NM TORQUE_1']*(1/60**2)*(1/10**3)
     # CREATE BSFC
@@ -135,18 +127,9 @@ try:
 except:
     print("could not convert ")
 
-print("------------------------------------------------------------------------------------------------------------")
-print(df.head(10))
-print("------------------------------------------------------------------------------------------------------------")
-
+# UP TO HERE.
 #df.to_csv(pre_filtered_csv)
-
-# filter # WHEN FILTERING SHOULD I ALSO CUT OUT THE "NOT RELEVANT COLS" TO MAKE THE DATA EASIER TO HANDLE? I THINK SO 
-# AS WILL HAVE THE FULL DF AS BEFORE
-# OR CAN FILTER
-# THEN CUT OUT IRELLEVANT COLS (Y)
-# NEED TO KEEP TRACK OF HOW MANY ROWS HAVE BEEN EXCLUDED 
-    # FUTURE output to log file 
+# where is prefiltered csv.
 
 #df = pd.read_csv(pre_filtered_csv, index_col = False)
 print("----------------")
@@ -363,14 +346,3 @@ print("--------------------------------------------------------")
 
 df.to_csv(f"{full_data_dir}full_data_filtered_additional.csv")
 
-# if not too big store as CSV (might take a while )
-
-# plot again
-# group 
-
-# then is the pivot stage 
-# then the fitting stage 
-
-
-# I don't think (for whatever reason) that the data has been concatenated properly ! 
-# morning work on this concatenation ! 
