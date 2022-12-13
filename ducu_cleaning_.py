@@ -19,11 +19,13 @@ full_data_dir = r"C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Dirty
 full_data = os.listdir(full_data_dir)
 full_data_csv = r"C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Dirty_Up_Clean_Up\\DUCU-example\\ducu-example\\full_data\\full_data.csv"
 pre_filtered_csv = r"C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Dirty_Up_Clean_Up\\DUCU-example\\ducu-example\\full_data\\full_data_prefilter.csv"
-csv_fp = "C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Dirty_Up_Clean_Up\\DUCU-example\\ducu-example\\csv\\"
+csv_fp = "C:\\Users\\Eleanor.E.Watson\0\OneDrive - Shell\\Examples\\Dirty_Up_Clean_Up\\DUCU-example\\ducu-example\\csv\\"
 csv_fp_listdir = os.listdir(csv_fp)
 ######################################
 
 csv_orig = []
+ # csv_orig is a list of dataframes//csvs from the list of files from csv_dir which is in a folder called CSV manipulated.
+ # QUESTION: currently unsure what exactly csv_manipulated involves.
 for filename in csv_files:
     df = pd.read_csv(f"{csv_dir}{filename}", index_col=0)
     csv_orig.append(df)
@@ -34,11 +36,12 @@ for filename in csv_files:
 ################
 
 ############## DEBUGGING #################################
+ # csv_orig is a list of dataframes//csvs from the list of files from csv_dir which is in a folder called CSV manipulated.
+ # QUESTION: currently unsure what exactly csv_manipulated involves.
+ # csv - is a list of dataframes from csv_orig however they had 2 extra columns on the side so this is removing these extra columns.
 csv = []
 for df in csv_orig: 
     df = df.iloc[2:]
-    #print(df.head(6))
-    #print("---------")
     csv.append(df)
 
 #for i in csv:
