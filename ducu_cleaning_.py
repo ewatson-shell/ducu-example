@@ -44,63 +44,29 @@ for df in csv_orig:
     df = df.iloc[2:]
     csv.append(df)
 
-#for i in csv:
-#    print("----------------------------------------------------------------------------------------------------------------------------------------------------")
-#    print(i.head(10))
-#    print("----------------------------------------------------------------------------------------------------------------------------------------------------")
-#    print(i.dtypes)
-#    print("----------------------------------------------------------------------------------------------------------------------------------------------------")
-#    for j in i.columns:
-#        try:    
-#            print(df[j].unique())
-#            print("-----")
-#        except:
-#            pass
-#    print("----------------------------------------------------------------------------------------------------------------------------------------------------")
-#############################################################
+# renaming the columns in the dataframe from a long RUNTIMED to more concise RUNTIMED.
 for i in csv: 
-   # print("----------------------------------------------------------------------------------------------------------------------------------------------------")
-  #  print(i.head(6))
-   # print(f"length of data frame is: {len(i)}")
     try:
        i.rename(columns={'RUNTIMED SECS Unnamed: 1_level_2': 'RUNTIMED'}, inplace=True)
     except:
         None
 
 ##########################################################
-
-# need to rename the column runtimed in rest of the csvs
-# write to a new directory 
-# :-)
 ##########################
 # concatenating files
 #########################
 # have to squish the columns into 1 header before concatenation!
-
 #for df in csv:
 full_df = pd.concat([csv[0],csv[1],csv[2],csv[3],csv[4],csv[5],csv[6],csv[7],csv[8],csv[9],csv[10]], ignore_index = True)
 
-
-#print(full_df.head(10))
-#print(full_df.head(-10))
-
-#print(full_df['Run'].unique())
-
-#print("----------")
-##print(len(full_df))
-#print("-------------------")
-
+# HERE WE ARE REMOVING THE RELATIVE TRUES (DOES THIS WORK MAYBE CHECK?)
 for col in df.columns: 
     df = df[df[col] !='True']
     df = df[df[col] !='TRUE']
 
+#writing to full df to csv, but specifically to the _2 version? why? what is the difference? 
 
 full_df.to_csv(f"{full_data_dir}full_data_2.csv")
-
-#print(full_df.head(20))
-
-
-
 #TODO
 ########################################
 # converting UNITS
