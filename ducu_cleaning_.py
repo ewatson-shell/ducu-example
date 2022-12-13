@@ -19,7 +19,7 @@ full_data_dir = r"C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Dirty
 full_data = os.listdir(full_data_dir)
 full_data_csv = r"C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Dirty_Up_Clean_Up\\DUCU-example\\ducu-example\\full_data\\full_data.csv"
 pre_filtered_csv = r"C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Dirty_Up_Clean_Up\\DUCU-example\\ducu-example\\full_data\\full_data_prefilter.csv"
-csv_fp = "C:\\Users\\Eleanor.E.Watson\0\OneDrive - Shell\\Examples\\Dirty_Up_Clean_Up\\DUCU-example\\ducu-example\\csv\\"
+csv_fp = "C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Dirty_Up_Clean_Up\\DUCU-example\\ducu-example\\csv\\"
 csv_fp_listdir = os.listdir(csv_fp)
 ######################################
 
@@ -50,11 +50,17 @@ for df in csv_orig:
     csv.append(df)
 
 # renaming the columns in the dataframe from a long RUNTIMED to more concise RUNTIMED.
-for i in csv: 
+for df, filename_ in zip(csv, csv_files): 
     try:
-       i.rename(columns={'RUNTIMED SECS Unnamed: 1_level_2': 'RUNTIMED'}, inplace=True)
+       df.rename(columns={'RUNTIMED SECS Unnamed: 1_level_2': 'RUNTIMED'}, inplace=True)
+       df.to_csv( f"C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Dirty_Up_Clean_Up\\DUCU-example\\ducu-example\\raw_processed\\{filename_}.csv")
     except:
         None
+
+
+
+## write these cleaned files to be plotted? 
+## QUESTION: where did I do this originally and with what data? 
 
 ##########################################################
 ##########################
