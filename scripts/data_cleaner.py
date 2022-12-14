@@ -4,6 +4,10 @@ import time
 import numpy as np
 from functions.cleaning import cleaner # 
 
+
+## NOT IN USE THIS IS FUTURE PLANNED TO BE USED.
+## ACTUAL USED CODE IS IN: ducu_cleaning.py
+
 csv_dir = r"C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Dirty_Up_Clean_Up\\DUCU-example\\ducu-example\\csv_manipulated\\"
 csv_files = os.listdir(csv_dir)
 full_data_dir = r"C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Dirty_Up_Clean_Up\\DUCU-example\\ducu-example\\full_data\\"
@@ -81,3 +85,5 @@ start_len = len(df)
 # think what data structure would like to implement to use the cleaner function? 
 # check that the TRUES have been eliminated and record how much of those have been eliminated ovcerall. 
 # can a tuple be an input to a function? 
+
+
