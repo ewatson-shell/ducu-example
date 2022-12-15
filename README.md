@@ -24,3 +24,10 @@ In the graphs file:
 - post - after manual filtering, which filters out any possible behaviours which could have impacted the result. 
 
 The data and graphs file have been added to share drive. 
+
+
+Scripts File:
+-------------
+
+Order of Python files to be run:
+----------------------------------
