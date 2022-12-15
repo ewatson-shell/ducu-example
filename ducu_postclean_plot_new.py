@@ -33,10 +33,8 @@ csv_folder = r"C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Dirty_Up
 #create a data frame dictionary to store your data frames
 #DataFrameDict = {elem : pd.DataFrame() for elem in Filenames}
 
-
-
-
-
+# Question: are the files in CSV_FOLDER are they filtered or not?
+# Question: At which point are the files written to the folder CSV in full_data? (Thinking it must be in the cleaning section.)
 csv_files = os.listdir(csv_folder)
 
 csv = []

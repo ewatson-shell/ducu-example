@@ -37,3 +37,9 @@ To do further (with more time):
 ------------------------------
 - add filepaths to a config file and read them in under those names into the folders.
 - Utilise importing functions from functions folder and reduce repeated code.
+
+
+Notes:
+-----
+- In my plotting -- I had issue plotting some columns e.g. fuel flow -> so to do this manually.
+- Remove unnecessary print statements.

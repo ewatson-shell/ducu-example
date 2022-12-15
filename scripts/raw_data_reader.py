@@ -1,9 +1,12 @@
 import pandas as pd
 import os
 
-raw_data_dir = r"C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Dirty_Up_Clean_Up\\DUCU-example\\ducu-example\\raw"
+raw_data_dir = r"C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Ducu-git\\data\\raw\\"
 raw_data_ls = os.listdir(raw_data_dir)
 
+# TODO
+# need to add block and fuel column, run and filename
+# somewhere along road lost that piece of code - rewrite.
 raw_data_dfs = []
 for file in raw_data_ls:
     os.chdir(raw_data_dir)
