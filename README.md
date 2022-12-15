@@ -31,3 +31,9 @@ Scripts File:
 
 Order of Python files to be run:
 ----------------------------------
+
+
+To do further (with more time):
+------------------------------
+- add filepaths to a config file and read them in under those names into the folders.
+- Utilise importing functions from functions folder and reduce repeated code.
