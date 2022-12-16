@@ -11,17 +11,18 @@ csv_folder = r"C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Ducu-git
 csv_files = os.listdir(csv_folder)
 final = r"C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Ducu-git\\data\\csv_processed_cleaned_final\\final.csv"
 
-csv_list = []
+df = pd.read_csv(f"{csv_folder}29-gminj-018DIA2.csv")
 
-for file in csv_files:
-    df = pd.read_csv(csv_folder+file)
-    csv_list.append(df)
+
+csv_list = [df]
+
 
 print(csv_list)
 
 feature_columns = ['BSFC', 'Power kW','Fuel Flow kg/hr FLOWFUEL', 'OBD Long Term Fuel Trim Shift  % OBD_LTFT', 'Engine Torque NM TORQUE_1' ]
 #feature_columns = ['Injector Pulse width mS OBD_INJ']
 df_cols = ['Fuel', 'Run', 'Fuel_Block', 'Block', 'Response', 'SOT', 'EOT', 'change', 'pert_change']
+
 
 raw_data_processed_df = pd.DataFrame(columns = df_cols)
 for df in csv_list:
@@ -34,6 +35,7 @@ for df in csv_list:
     filter_df['seconds'] = filter_df['time_list'].apply(lambda x : dt.timedelta(hours=int(x[0]), minutes=int(x[1]), seconds=int(x[2])).total_seconds())
     print(filter_df['seconds'])
     filter_df['seconds_index'] = filter_df['seconds']
+    filter_df.drop(filter_df[(filter_df['seconds'] > 1888) & (filter_df['seconds'] < 5001)].index, inplace=True)
     filter_df['Fuel_Block'] = filter_df['Fuel']+filter_df['Block'].astype('str')
     print(filter_df.columns)
     print(filter_df.head(10))
@@ -69,8 +71,8 @@ for df in csv_list:
         print("=============================")
         print(f"Percentage Change: {pct_delta}, delta: {delta}")
         print("===============================")
-    
-        row = {'Fuel':fuel, 'Run':run, 'Fuel_Block':fuel_block, 'Block':block, 'Response':col, 'SOT':SOT, 'EOT':EOT, 'change':delta, 'pert_change':pct_delta}
+        response = f"{col}_adjusted"
+        row = {'Fuel':fuel, 'Run':run, 'Fuel_Block':fuel_block, 'Block':block, 'Response':response, 'SOT':SOT, 'EOT':EOT, 'change':delta, 'pert_change':pct_delta}
         raw_data_processed_df.append(row, ignore_index=True)
         df.append(row, ignore_index=True)
         print(raw_data_processed_df.head(20))

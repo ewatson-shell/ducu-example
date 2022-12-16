@@ -12,8 +12,8 @@ import pandas as pd
 #1:15:00 to 3:00:00 and one peak in the end from time 56:00:00 to 57:00:00 . These data were 
 #suggested by the technician to be excluded due to unusual engine activities.
 csv_folder = "C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Ducu-git\\data\\csv_processed_filtered\\"
-df1 = pd.read_csv(f"{fp}\\29-gminj-018DIA2.csv")
-df2 = pd.read_csv(f"{fp}\\29-gminj-023DIA3") 
+df1 = pd.read_csv(f"{csv_folder}\\29-gminj-018DIA2.csv")
+df2 = pd.read_csv(f"{csv_folder}\\29-gminj-023DIA3") 
 # that is my plan ! 
 # or maybe the filtering only happens when doing the linear fit? 
 # all the interested resonses for df1 
