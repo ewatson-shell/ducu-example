@@ -7,8 +7,9 @@ import plotly.express as px
 import os
 from csv import DictWriter
 
-csv_folder = r"C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Dirty_Up_Clean_Up\\DUCU-example\\ducu-example\\full_data\\csv\\"
+csv_folder = r"C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Ducu-git\\data\\csv_processed_filtered\\"
 csv_files = os.listdir(csv_folder)
+final = "C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Ducu-git\\data\\csv_processed_cleaned_final\\"
 
 csv_list = []
 
@@ -80,7 +81,10 @@ for df in csv_list:
        #     dict_writer_object.writerow(row)
        #     f.close()
 
-        with open(rf"C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Dirty_Up_Clean_Up\\DUCU-example\\ducu-example\\full_data\\injector_pulse_width.csv", 'a+') as f:
+
+
+
+        with open(rf"{final}", 'a+') as f:
             dict_writer_object = DictWriter(f, fieldnames = df_cols)
             dict_writer_object.writerow(row)
             f.close()

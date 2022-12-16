@@ -202,4 +202,4 @@ for df in csv_list:
     print(f"Total Percentage of Data lost: {percentage_loss}")
     print("--------------------------------------------------------")
 
-    df.to_csv(f"{full_data_dir}_{filename}full_data_filtered_additional.csv")
+    df.to_csv(f"{full_data_dir}//{filename}.csv")
