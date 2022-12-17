@@ -8,7 +8,7 @@ import os
 fp = r"C:\\Users\\Eleanor.E.Watson\\OneDrive - Shell\\Examples\\Ducu-git\\data\\csv_processed_cleaned_final\\"
 
 # csv = "original_raw_data_processed.csv"
-csv = "injector_pulse_width.csv"
+csv = "final_sorted.csv"
 df = pd.read_csv(fp+csv)
 
 df = df.dropna()
